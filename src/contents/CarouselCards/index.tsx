@@ -9,16 +9,27 @@ import {
 import Image from "next/image";
 import { LandMedia, LandPrice, LandSize, Property } from "@/utils/types";
 import { useState } from "react";
+import { Heart, Share2, MessageCircleReply, Copy } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { propertyDataActions } from "@/lib/slices/propertyData";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const CarouselCards = ({ property }: { property: Property }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const { likedProperties } = useAppSelector((state) => state.propertyData);
 
   const getPrice = (landPrice: LandPrice) => {
     if (!landPrice?.price_per_acre_crore) return "Price not available";
 
     const { lakh, crore } = landPrice.price_per_acre_crore;
 
-    if (lakh !== undefined) {
+    if (lakh !== undefined && crore === 0) {
       return `${lakh} lakhs/acre`;
     }
 
@@ -40,9 +51,19 @@ const CarouselCards = ({ property }: { property: Property }) => {
     );
   };
 
+  const handleLikeClick = (id: number) => {
+    if (likedProperties?.includes(id)) {
+      dispatch(propertyDataActions.removeLikedProperty(id));
+    } else dispatch(propertyDataActions.addLikedProperty(property?.id));
+  };
+
   return (
     <Card
       key={property.id}
+      data-aos="zoom-in"
+      data-aos-easing="linear"
+      data-aos-duration="300"
+      data-aos-once="true"
       className="shadow-md rounded-lg overflow-hidden py-0"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -61,6 +82,33 @@ const CarouselCards = ({ property }: { property: Property }) => {
             </CarouselItem>
           ))}
         </CarouselContent>
+        <div
+          className="absolute top-2 right-14 bg-white p-2 rounded-3xl cursor-pointer"
+          onClick={() => handleLikeClick(property?.id)}
+        >
+          <Heart
+            className={
+              likedProperties?.includes(property?.id)
+                ? "text-red-500"
+                : "" + "w-6 h-6"
+            }
+          />
+        </div>
+        <div className="absolute top-2 right-2">
+          <Popover>
+            <PopoverTrigger className="bg-white p-2 rounded-3xl cursor-pointer">
+              <Share2 className="w-6 h-6" />
+            </PopoverTrigger>
+            <PopoverContent className="p-1 w-[130px]">
+              <p className="hover:bg-yellow-100 text-sm p-2 flex items-center">
+                WhatsApp <MessageCircleReply className="ml-4" />
+              </p>
+              <p className="hover:bg-yellow-100 text-sm p-2 flex items-center">
+                Copy Link <Copy className="ml-4" />
+              </p>
+            </PopoverContent>
+          </Popover>
+        </div>
         {isHovered && (
           <>
             <div className="absolute bottom-1 left-2 flex items-center justify-center">
