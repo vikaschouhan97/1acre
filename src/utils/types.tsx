@@ -31,44 +31,59 @@ export const NavbarConstantContact: AccordionData = {
 };
 
 export interface LandMedia {
-    image: string;
-  }
-  
-  export interface LandPrice {
-    price_per_acre_crore: {
-      lakh?: number;
-      crore?: number;
-    };
-  }
-  
-  export interface LandSize {
-    total_land_size_in_acres: {
-      acres?: number;
-      cents?: number;
-      guntas?: number;
-    };
-  }
-  
-  interface DivisionInfo {
-    id: number;
-    name: string;
-    division_type: string;
-  }
-  
-  export interface Property {
-    id: number;
-    land_media: LandMedia[];
-    land_price: LandPrice;
-    land_size: LandSize;
-    division_info: DivisionInfo[];
-  }
-  
-  export interface CarouselCardsProps {
-    property: Property;
-  }
-  
-  export interface ImageProps {
-    img: LandMedia;
-    idx: number;
-  }
-  
+  image: string;
+}
+
+export interface LandPrice {
+  price_per_acre_crore: {
+    lakh?: number;
+    crore?: number;
+  };
+}
+
+export interface LandSize {
+  total_land_size_in_acres: {
+    acres?: number;
+    cents?: number;
+    guntas?: number;
+  };
+}
+
+interface DivisionInfo {
+  id: number;
+  name: string;
+  division_type: string;
+}
+
+export interface Property {
+  id: number;
+  land_media: LandMedia[];
+  land_price: LandPrice;
+  land_size: LandSize;
+  division_info: DivisionInfo[];
+}
+
+export interface CarouselCardsProps {
+  property: Property;
+}
+
+export interface ImageProps {
+  img: LandMedia;
+  idx: number;
+}
+
+export interface Location1 {
+  id: number;
+  lat: string;
+  long: string;
+  land_price: LandPrice;
+  land_size: LandSize;
+}
+
+export interface Location2 {
+  id: number;
+  lat: number;
+  lng: number;
+  price: string;
+  land_size: string;
+}
