@@ -20,14 +20,3 @@ jobs:
         with:
           name: production-files
           path: ./build
-
-  # Deploy Job
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: production-files
-          path: ./build
