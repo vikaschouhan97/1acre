@@ -1,3 +1,5 @@
+import Footer from "@/contents/Footer";
+import Navbar from "@/contents/Navbar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <div className="w-full flex justify-center items-center flex-col">
+      <Navbar />
       {children}
+      <Footer />
     </div>
   );
 }

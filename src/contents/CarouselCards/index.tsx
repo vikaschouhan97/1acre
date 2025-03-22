@@ -17,6 +17,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { toast } from "sonner";
 
 /**
  * Utility function to get formatted price string.
@@ -72,9 +73,10 @@ const CarouselCards = ({ property }: { property: Property }) => {
       data-aos-easing="linear"
       data-aos-duration="300"
       data-aos-once="true"
-      className="shadow-md rounded-lg overflow-hidden py-0"
+      className="shadow-md rounded-lg overflow-hidden py-0 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => toast.info("Feature coming soon!")}
     >
       {/* Image Carousel */}
       <Carousel opts={{ loop: true }} className="m-0">
@@ -91,28 +93,39 @@ const CarouselCards = ({ property }: { property: Property }) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-      
+
         {/* Like Button */}
         <div
           className="absolute top-2 right-14 bg-white p-2 rounded-3xl cursor-pointer"
-          onClick={() => handleLikeClick(property.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleLikeClick(property.id);
+          }}
         >
           <Heart
-            className={`w-6 h-6 ${likedProperties?.includes(property.id) ? "text-red-500" : ""}`}
+            className={`w-6 h-6 ${
+              likedProperties?.includes(property.id) ? "text-red-500" : ""
+            }`}
           />
         </div>
 
         {/* Share Button with Popover */}
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-2 right-2" onClick={(e) => e.stopPropagation()}>
           <Popover>
             <PopoverTrigger className="bg-white p-2 rounded-3xl cursor-pointer">
               <Share2 className="w-6 h-6" />
             </PopoverTrigger>
             <PopoverContent className="p-1 w-[150px]">
-              <p className="hover:bg-yellow-100 text-sm p-2 flex items-center">
+              <p
+                className="hover:bg-yellow-100 text-sm p-2 flex items-center"
+                onClick={(e) => e.stopPropagation()}
+              >
                 WhatsApp <MessageCircleReply className="ml-4" />
               </p>
-              <p className="hover:bg-yellow-100 text-sm p-2 flex items-center">
+              <p
+                className="hover:bg-yellow-100 text-sm p-2 flex items-center"
+                onClick={(e) => e.stopPropagation()}
+              >
                 Copy Link <Copy className="ml-4" />
               </p>
             </PopoverContent>
@@ -122,10 +135,16 @@ const CarouselCards = ({ property }: { property: Property }) => {
         {/* Carousel Navigation Arrows (visible on hover) */}
         {isHovered && (
           <>
-            <div className="absolute bottom-1 left-2 flex items-center justify-center">
+            <div
+              className="absolute bottom-1 left-2 flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
               <CarouselPrevious className="relative left-0 translate-x-0 rounded-lg cursor-pointer" />
             </div>
-            <div className="absolute bottom-1 right-2 flex items-center justify-center">
+            <div
+              className="absolute bottom-1 right-2 flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
               <CarouselNext className="relative right-0 translate-x-0 rounded-lg cursor-pointer" />
             </div>
           </>
@@ -135,12 +154,17 @@ const CarouselCards = ({ property }: { property: Property }) => {
       {/* Property Details */}
       <CardContent className="px-4">
         <div className="flex">
-          <h4 className="text-md text-primary">Rs {getPrice(property.land_price)}</h4>
+          <h4 className="text-md text-primary">
+            Rs {getPrice(property.land_price)}
+          </h4>
           <span className="text-md mx-2">&bull;</span>
-          <h4 className="text-md text-primary">{getTotalLandSize(property.land_size)}</h4>
+          <h4 className="text-md text-primary">
+            {getTotalLandSize(property.land_size)}
+          </h4>
         </div>
         <h5 className="mb-4 mt-1 text-sm text-[#929292]">
-          {property.division_info[2]?.name}, {property.division_info[1]?.name} (dt)
+          {property.division_info[2]?.name}, {property.division_info[1]?.name}{" "}
+          (dt)
         </h5>
       </CardContent>
     </Card>
