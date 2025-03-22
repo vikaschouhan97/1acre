@@ -29,3 +29,46 @@ export const NavbarConstantContact: AccordionData = {
   title: "Contact Us",
   options: ["Support@1acre.in", "WhatsApp", "LinkedIn", "YouTube", "Instagram"],
 };
+
+export interface LandMedia {
+    image: string;
+  }
+  
+  export interface LandPrice {
+    price_per_acre_crore: {
+      lakh?: number;
+      crore?: number;
+    };
+  }
+  
+  export interface LandSize {
+    total_land_size_in_acres: {
+      acres?: number;
+      cents?: number;
+      guntas?: number;
+    };
+  }
+  
+  interface DivisionInfo {
+    id: number;
+    name: string;
+    division_type: string;
+  }
+  
+  export interface Property {
+    id: number;
+    land_media: LandMedia[];
+    land_price: LandPrice;
+    land_size: LandSize;
+    division_info: DivisionInfo[];
+  }
+  
+  export interface CarouselCardsProps {
+    property: Property;
+  }
+  
+  export interface ImageProps {
+    img: LandMedia;
+    idx: number;
+  }
+  
