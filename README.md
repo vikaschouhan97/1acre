@@ -1,6 +1,7 @@
 # 1acre - Buy & Sell Lands
 
 Welcome to the **1acre** repository! This is project assignment for 1acre.
+![image](https://github.com/user-attachments/assets/ddf766b1-11c1-40b6-aa57-7d5da30b4383)
 
 ## 🚀 Live Demo
 [🔗 Click here to visit the live site](https://1acre-gamma.vercel.app/)
