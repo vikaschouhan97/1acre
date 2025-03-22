@@ -10,7 +10,7 @@ Follow these steps to clone, install dependencies, and run the project locally.
 
 ### 1️⃣ Clone the Repository
 ```sh
-git clone [https://vkaschouhan97/1acre.git](https://github.com/vikaschouhan97/1acre)
+git clone https://github.com/vikaschouhan97/1acre
 cd 1acre
 ```
 
