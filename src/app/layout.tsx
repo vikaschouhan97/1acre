@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/contents/Navbar";
-import Footer from "@/contents/Footer";
 import StoreProvider from "@/providers/storeProvider";
+import { Toaster } from "@/components/ui/sonner"
 
 const poppinsfont = Poppins({
   subsets: ["latin"],
@@ -25,9 +24,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppinsfont.variable}>
         <StoreProvider>
-          <Navbar />
+          <Toaster position="top-right" />
           {children}
-          <Footer />
         </StoreProvider>
       </body>
     </html>
